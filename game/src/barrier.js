@@ -10,7 +10,7 @@ class Barrier extends GameObject {
     init() {
         // This is hardcoded for now - should be some location off the right side of the screen
         this.location = 15;
-
+        this.passed = false;
         // Creates 2 boxes which will be used for the top and bottom obstacles,
         // the floor will obscure the height of the object so we don't need to modify this much.
         const boxOptions = {width: 1, height: 10, depth: 1};
@@ -40,6 +40,11 @@ class Barrier extends GameObject {
 
         if (this.location < -25) {
             destroyObject(this);
+        }
+
+        if(this.location < -1 && !this.passed){
+            this.passed = true;
+            addScore(1);
         }
     }
 
